@@ -1,0 +1,23 @@
+{
+  "name": "yelpcamp",
+  "version": "1.0.0",
+  "description": "this is project made durinweb developmentg course",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/manjots1607/yelpcamp.git"
+  },
+  "author": "manjot singh",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/manjots1607/yelpcamp/issues"
+  },
+  "homepage": "https://github.com/manjots1607/yelpcamp#readme",
+  "dependencies": {
+    "ejs": "^2.6.1",
+    "express": "^4.16.4"
+  }
+}
