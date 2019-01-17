@@ -1,0 +1,30 @@
+<% include partials/header.ejs %>
+
+<div class="container">
+    <header class="jumbotron">
+        <DIV class="container">    
+            <h1 ><%= campground.name %></h1>
+        </div>
+    </header>  
+    <div class="row">
+        <div class="col-md-6 col-sm-10">
+            <div class="thumbnail">
+             <img src="<%= campground.image  %>" >
+             </div>
+        </div>
+        <div class="col-md-6 col-sm-12">
+            <h3>Description</h3>
+            <p><%= campground.description %></p>
+            <h3>Comments</h3>
+            <% campground.comments.forEach(function(comment){ %>
+                <p><strong> <%= comment.author %></strong> - <%= comment.text%></p>
+            <% }); %>
+        </div>
+    </div>
+</div>
+
+
+
+
+               
+                
