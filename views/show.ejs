@@ -4,9 +4,14 @@
     <header class="jumbotron">
         <DIV class="container">    
             <h1 ><%= campground.name %></h1>
-            <p>
-                <a class="btn btn-success" href="/campgrounds/<%= campground._id %>/comments/new">Add new Comment</a>
-            </p>
+            <% if(curUser && campground.author.id.equals(curUser._id)){ %>
+            <div id="header-btns">
+                <a class="btn btn-primary" href="/campgrounds/<%= campground._id %>/update">Update Campground</a>
+                <form action="/campgrounds/<%= campground._id %>?_method=Delete" method="post" id="del-form">
+                     <button class="btn btn-danger" >delete Campground</button>
+                </form>    
+            </div>
+            <% } %>
         </div>
     </header>  
     <div class="row">
@@ -20,11 +25,27 @@
                 
             
             <h3>Description</h3>
-            <p><%= campground.description %></p></div>
+            <p><%= campground.description %></p>
+            <p>
+                <em>Submitted by <%= campground.author.username%> </em>
+            </p>
+            </div>
             <div class="well">
             <h3>Comments</h3>
+            <p> <a class="btn btn-success" href="/campgrounds/<%= campground._id %>/comments/new">Add new Comment</a></p>
             <% campground.comments.forEach(function(comment){ %>
-                <p><strong> <%= comment.author %></strong> - <%= comment.text%></p>
+                <div>
+                    <strong> <%= comment.author.username %></strong> 
+                    <% if(curUser && comment.author.id.equals(curUser._id)){ %>
+                    <span style="float:right;">
+                        <a href="/campgrounds/<%= campground._id %>/comments/<%= comment._id %>/update">Edit</a>&nbsp<a></a>
+                        <form action="/campgrounds/<%= campground._id %>/comments/<%= comment._id %>?_method=delete" method="post" style="display:inline;">
+                            <button class="btn btn-link " style="color:red;">Delete</button>
+                        </form>
+                    </span>
+                    <% }%>
+                    <p>&nbsp &nbsp<%= comment.text%></p>
+                </div>
             <% }); %></div>
         </div>
     </div>

@@ -24,27 +24,27 @@ function seedDB(){
             console.log(err);
         }else{
             console.log("Campground deleted");
-            camps.forEach(function(camp){
-               Campground.create(camp,function(err,campdata){
-                   if(err){
-                       console.log(err);
-                   }else{
-                       console.log("added successfully");
-                       Comment.create({
-                           text:"It's the adventure to live in this camp",
-                           author:"david"
-                       },function(err,comment){
-                           if(err){
-                               console.log(err);
-                           }else{
-                               console.log("Added Comment");
-                               campdata.comments.push(comment);
-                               campdata.save();
-                           }
-                       })
-                   }
-               }); 
-            });
+            // camps.forEach(function(camp){
+            //   Campground.create(camp,function(err,campdata){
+            //       if(err){
+            //           console.log(err);
+            //       }else{
+            //           console.log("added successfully");
+            //           Comment.create({
+            //               text:"It's the adventure to live in this camp",
+            //               author:"david"
+            //           },function(err,comment){
+            //               if(err){
+            //                   console.log(err);
+            //               }else{
+            //                   console.log("Added Comment");
+            //                   campdata.comments.push(comment);
+            //                   campdata.save();
+            //               }
+            //           })
+            //       }
+            //   }); 
+            // });
         }
     });
     
