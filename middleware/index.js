@@ -7,6 +7,7 @@ middlewareObj.isLoggedIn=function(req,res,next){
     if(req.isAuthenticated()){
         return next();
     }
+    req.flash("error","Please login first");
     res.redirect("/login");
 };
 
@@ -23,6 +24,7 @@ middlewareObj.isAuthor=function(req,res,next){
                 next();
                }
                else{
+                   req.flash("error","you does'nt have permission to do that");
                    res.redirect("/campgrounds");
                }
            } 
@@ -48,6 +50,7 @@ middlewareObj.isCommentAuthor=function(req,res,next){
                 next();
                }
                else{
+                   req.flash("error","you does'nt have permission to do that");
                    res.redirect("/campgrounds/"+req.params.id);
                }
            } 
@@ -56,6 +59,7 @@ middlewareObj.isCommentAuthor=function(req,res,next){
         
     }
     else{
+        req.flash("error","you does'nt have permission to do that");
         res.redirect("/campgrounds/"+req.params.id);
     }
 };

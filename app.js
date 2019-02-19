@@ -9,6 +9,7 @@ passportLocalMongoose = require("passport-local-mongoose"),
            Campground = require("./models/campground"),
               Comment = require("./models/comment"),
                seedDB = require("./seed"),
+               flash  = require("connect-flash"),
       methodOverridde = require("method-override");
   
 //   seedDB(); 
@@ -19,7 +20,7 @@ var indexRoutes=require("./routes/index");
 
    
    
- mongoose.connect("mongodb://localhost/yelp_camp",{useNewUrlParser:true});
+ mongoose.connect(process.env.DATABASEURL,{useNewUrlParser:true});
 
 
 app.use(bodyparser.urlencoded({extended:true}));
@@ -31,6 +32,7 @@ app.use(require("express-session")({
     saveUninitialized:false
 }));
 
+app.use(flash());
 app.use(methodOverridde("_method"));
 app.use(passport.initialize());
 app.use(passport.session());
@@ -40,13 +42,15 @@ passport.deserializeUser(User.deserializeUser());
 
 app.use(function(req,res,next){
     res.locals.curUser=req.user;
+    res.locals.error=req.flash("error");
+    res.locals.success=req.flash("success");
+    
     next();
 });
 
 app.use("/campgrounds",campgroundRoutes);
 app.use("/campgrounds/:id/comments",commentRoutes);
 app.use("/",indexRoutes);
-
 
 app.listen(process.env.PORT,process.env.IP,function(){
     console.log("Yelpcamp app started");
